@@ -3,14 +3,14 @@ import './App.css';
 import logo from './image/logo.gif';
 
 const App = () => {
-  const [clickPosition, setClickPosition] = useState({ x: 112, y: 185 });
-  const[sc,setSc]=useState(-1)
+  const [clickPosition, setClickPosition] = useState({ x: 50, y: 630 });
+  const [sc, setSc] = useState(-1)
   const handleClick = (e) => {
     const { clientX, clientY } = e;
-    if(clickPosition.x<clientX && clickPosition.y<clientY){
-      setSc(-1)
+    if (clickPosition.x <= clientX) {
+      setSc(-1);
     }
-    else{
+    else if (clickPosition.x > clientX) {
       setSc(1);
     }
     setClickPosition({ x: clientX, y: clientY });
@@ -20,7 +20,7 @@ const App = () => {
     const imageX = clickPosition.x;
     const imageY = clickPosition.y;
     const angleRad = Math.atan2(clickY - imageY, clickX - imageX);
-    return angleRad * (180 / Math.PI) ; 
+    return angleRad * (180 / Math.PI);
   };
 
   return (
@@ -32,8 +32,8 @@ const App = () => {
           position: 'absolute',
           left: clickPosition.x,
           top: clickPosition.y,
-          transition:'left 10s, top 10s',
-          transform: `translate(-50%, -50%) rotate(${calculateRotationAngle(clickPosition.x, clickPosition.y)}deg) scaleX(${sc})`, 
+          transition: 'left 10s, top 10s',
+          transform: `translate(-50%, -50%) rotate(${calculateRotationAngle(clickPosition.x, clickPosition.y)}deg) scaleX(${sc})`,
           width: '100px',
           height: '100px'
         }}
