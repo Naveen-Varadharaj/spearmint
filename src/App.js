@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'; // You may need to create this file for styling
+import logo from './image/logo.gif'
+const App = () => {
+  const [clickPosition, setClickPosition] = useState({ x: 12, y: 585 });
 
-function App() {
+  const handleClick = (e) => {
+    const { clientX, clientY } = e;
+    // console.log(clientX);
+    // console.log(clientY);
+    setClickPosition({ x: clientX, y: clientY });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" onClick={handleClick}>
+      <img
+        src={logo}
+        alt="gif logo"
+        style={{
+          position: 'absolute',
+          left: clickPosition.x,
+          top: clickPosition.y,         
+          transition:'left 10s, top 10s',
+          width:'100px',
+          height:'100px'
+        }}
+      />
     </div>
   );
-}
+};
 
 export default App;
